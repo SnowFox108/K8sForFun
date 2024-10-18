@@ -1,0 +1,53 @@
+Setup Kubenectes Dashboard
+
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/recommended.yaml
+kubectl apply -f dashboard-adminuser.yaml
+kubectl apply -f cluster-role-binding.yaml
+
+kubectl -n kubernetes-dashboard create token admin-user
+
+kubectl proxy
+
+http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/
+
+Build Image
+docker build -t frontapi .
+docker build -t webapp .
+docker build -t functionworker .
+docker build -t functiondurable .
+
+
+Deploy System Resources
+
+dapr init -k --dev
+dapr status -k
+dapr dashboard -k -p 9999
+
+kubectl apply --server-side -f https://github.com/kedacore/keda/releases/download/v2.15.1/keda-2.15.1.yaml
+
+
+kubectl apply -f dapr-service.yaml
+
+For Dapr Actors only
+kubectl apply -f placement-service.yaml
+
+
+kubectl apply -f kerberos-sidecar.yaml
+kubectl apply -f redis-service.yaml
+kubectl apply -f zipkin-service.yaml
+
+
+
+
+Deploy Services
+
+kubectl apply -f front-service.yaml
+kubectl apply -f webapp-service.yaml
+kubectl apply -f worker-function.yaml
+kubectl apply -f durable-function.yaml
+
+Other useful cmd
+
+kubectl get nodes
+kubectl get pods
+kubectl get svc

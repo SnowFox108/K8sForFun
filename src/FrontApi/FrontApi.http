@@ -1,0 +1,6 @@
+@FrontApi_HostAddress = http://localhost:30577
+
+GET {{FrontApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

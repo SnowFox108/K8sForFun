@@ -1,0 +1,69 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: webapp
+  labels:
+    app: webapp
+spec:
+  selector:
+    app: webapp
+  ports:
+    - protocol: TCP  
+      port: 30567
+      targetPort: 8080
+      name: http
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webapp
+  labels:
+    app: webapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: webapp
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: webapp
+      # annotations:
+      #   dapr.io/enabled: "true"
+      #   dapr.io/app-id: "moneycorp-options-cloud-supports-function"
+      #   dapr.io/app-port: "32639"
+      #   dapr.io/config: "appconfig"
+    spec:
+      containers:
+        - name: webapp
+          image: webapp:latest
+          imagePullPolicy: Never
+          env:
+            - name: ASPNETCORE_ENVIRONMENT
+              value: Development
+            - name: ASPNETCORE_HTTP_PORTS
+              value: "8080"
+            - name: ApiConfigs__FrontApi__Uri
+              value: http://front-api:8080
+            - name: ApiConfigs__WorkerFunction__Uri
+              value: http://functionworker:80
+            # - name: DAPR_HTTP_PORT
+            #   value: "3500"
+            # - name: PODNAME
+            #   value: SUP01                    
+          ports:
+            - containerPort: 8080
+              # protocol: TCP
+          # volumeMounts:
+          #   - mountPath: /kerberos-sidecar
+          #     name: sidecar-volume
+          #     readOnly: true
+      restartPolicy: Always
+      # volumes:
+      #   - name: sidecar-volume
+      #     persistentVolumeClaim:
+      #       claimName: sidecar-volume
+      #       readOnly: true

@@ -1,0 +1,66 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35222.181
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FrontApi", "src\FrontApi\FrontApi.csproj", "{666E487D-62A0-493C-B49A-4D11C52328E0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_SupportFiles", "_SupportFiles", "{CC50B622-F78A-47EE-A11B-7165C5B83DC3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "k8s_local", "k8s_local", "{03FD784F-FC2A-4A9F-A15C-4759BC199EF3}"
+	ProjectSection(SolutionItems) = preProject
+		supportFiles\k8s_local\cluster-role-binding.yaml = supportFiles\k8s_local\cluster-role-binding.yaml
+		supportFiles\k8s_local\dashboard-adminuser.yaml = supportFiles\k8s_local\dashboard-adminuser.yaml
+		supportFiles\k8s_local\dashboard.txt = supportFiles\k8s_local\dashboard.txt
+		supportFiles\k8s_local\durable-function.yaml = supportFiles\k8s_local\durable-function.yaml
+		supportFiles\k8s_local\front-service.yaml = supportFiles\k8s_local\front-service.yaml
+		supportFiles\k8s_local\kerberos-sidecar.yaml = supportFiles\k8s_local\kerberos-sidecar.yaml
+		supportFiles\k8s_local\webapp-service.yaml = supportFiles\k8s_local\webapp-service.yaml
+		supportFiles\k8s_local\worker-function.yaml = supportFiles\k8s_local\worker-function.yaml
+	EndProjectSection
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{90CB7370-5FC4-4829-AD75-624D72BB41E1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApp", "src\WebApp\WebApp.csproj", "{E7216CB0-C2E3-4D38-8B67-B0526D98D9E5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FunctionWorker", "src\FunctionWorker\FunctionWorker.csproj", "{CF304482-5194-4B00-B050-152885654B54}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FunctionDurable", "src\FunctionDurable\FunctionDurable.csproj", "{CD7357CE-DE7D-4F77-978A-A2F66FD03F3D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{666E487D-62A0-493C-B49A-4D11C52328E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{666E487D-62A0-493C-B49A-4D11C52328E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{666E487D-62A0-493C-B49A-4D11C52328E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{666E487D-62A0-493C-B49A-4D11C52328E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{90CB7370-5FC4-4829-AD75-624D72BB41E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90CB7370-5FC4-4829-AD75-624D72BB41E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90CB7370-5FC4-4829-AD75-624D72BB41E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90CB7370-5FC4-4829-AD75-624D72BB41E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E7216CB0-C2E3-4D38-8B67-B0526D98D9E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7216CB0-C2E3-4D38-8B67-B0526D98D9E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7216CB0-C2E3-4D38-8B67-B0526D98D9E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7216CB0-C2E3-4D38-8B67-B0526D98D9E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF304482-5194-4B00-B050-152885654B54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF304482-5194-4B00-B050-152885654B54}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF304482-5194-4B00-B050-152885654B54}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF304482-5194-4B00-B050-152885654B54}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD7357CE-DE7D-4F77-978A-A2F66FD03F3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD7357CE-DE7D-4F77-978A-A2F66FD03F3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD7357CE-DE7D-4F77-978A-A2F66FD03F3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD7357CE-DE7D-4F77-978A-A2F66FD03F3D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{03FD784F-FC2A-4A9F-A15C-4759BC199EF3} = {CC50B622-F78A-47EE-A11B-7165C5B83DC3}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0AB3DF55-3411-4F93-8D8A-AD9C147136AB}
+	EndGlobalSection
+EndGlobal

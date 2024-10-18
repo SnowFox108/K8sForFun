@@ -1,0 +1,61 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  labels:
+    app: sidecar-volume
+  name: sidecar-volume
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Mi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: kerberos-sidecar
+  name: kerberos-sidecar
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kerberos-sidecar
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: kerberos-sidecar
+    spec:
+      containers:
+        - name: kerberos-sidecar
+          image: kerberos-sidecar
+          env:
+            - name: KEYTAB
+              value: zhangm.keytab
+            - name: KRB5CCNAME
+              value: FILE:/kerberos-sidecar/krb5cc
+            - name: KRB5_CONFIG
+              value: /kerberos-sidecar/krb5.conf
+            - name: PRINCIPAL
+              value: ZhangM
+            - name: REKINIT_PERIOD
+              value: "3600"
+            - name: SECRETS
+              value: /krb
+            - name: TRACE_OUT
+              value: /dev/stdout
+            - name: VOLUME
+              value: /kerberos-sidecar
+          volumeMounts:
+            - mountPath: /kerberos-sidecar
+              name: sidecar-volume
+          imagePullPolicy: Never
+      hostname: kerberos-sidecar
+      restartPolicy: Always
+      volumes:
+        - name: sidecar-volume
+          persistentVolumeClaim:
+            claimName: sidecar-volume

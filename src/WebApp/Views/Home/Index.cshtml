@@ -1,0 +1,49 @@
+﻿@model HomePageModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Load Weather Forcast here (WebApi)</p>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Date</th>
+            <th>Temperature</th>
+            <th>Summary</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var weather in Model.WeatherForecasts)
+        {
+            <tr>
+                <td>@weather.Date</td>
+                <td>@weather.TemperatureC</td>
+                <td>@weather.Summary</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+    <hr/>
+    <p>Load Train TimeTable here (Azure Functions)</p>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Date</th>
+            <th>Train Name</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var weather in Model.TimeTables)
+        {
+            <tr>
+                <td>@weather.Date</td>
+                <td>@weather.Name</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+
+    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>

@@ -1,0 +1,15 @@
+{
+  "profiles": {
+    "FunctionWorker": {
+      "commandName": "Project",
+      "commandLineArgs": "--port 7295"
+    },
+    "Container (Dockerfile)": {
+      "commandName": "Docker",
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}",
+      "DockerfileRunArguments": "--init",
+      "httpPort": 32250,
+      "useSSL": false
+    }
+  }
+}

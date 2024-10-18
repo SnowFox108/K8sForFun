@@ -1,0 +1,65 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: front-api
+  labels:
+    app: front-api
+spec:
+  selector:
+    app: front-api
+  ports:
+    - protocol: TCP  
+      port: 8080
+      targetPort: 8080
+      name: http
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: front-api
+  labels:
+    app: front-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: front-api
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: front-api
+      # annotations:
+      #   dapr.io/enabled: "true"
+      #   dapr.io/app-id: "moneycorp-options-cloud-supports-function"
+      #   dapr.io/app-port: "32639"
+      #   dapr.io/config: "appconfig"
+    spec:
+      containers:
+        - name: front-api
+          image: frontapi:latest
+          imagePullPolicy: Never
+          env:
+            - name: ASPNETCORE_ENVIRONMENT
+              value: Development
+            - name: ASPNETCORE_HTTP_PORTS
+              value: "8080"
+            # - name: DAPR_HTTP_PORT
+            #   value: "3500"
+            # - name: PODNAME
+            #   value: SUP01                    
+          ports:
+            - containerPort: 8080
+              # protocol: TCP
+          # volumeMounts:
+          #   - mountPath: /kerberos-sidecar
+          #     name: sidecar-volume
+          #     readOnly: true
+      restartPolicy: Always
+      # volumes:
+      #   - name: sidecar-volume
+      #     persistentVolumeClaim:
+      #       claimName: sidecar-volume
+      #       readOnly: true

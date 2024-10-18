@@ -1,0 +1,18 @@
+services:
+  frontapi:
+    image: ${DOCKER_REGISTRY-}frontapi
+    build:
+      context: .
+      dockerfile: src/FrontApi/Dockerfile
+  webapp:
+    image: ${DOCKER_REGISTRY-}webapp
+    build:
+      context: .
+      dockerfile: src/WebApp/Dockerfile
+
+  functionworker:
+    image: ${DOCKER_REGISTRY-}functionworker
+    build:
+      context: .
+      dockerfile: src/FunctionWorker/Dockerfile
+
